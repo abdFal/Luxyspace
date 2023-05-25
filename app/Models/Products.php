@@ -48,4 +48,20 @@ class Products extends Model
     {
         return $this->belongsTo(transaction_item::class, 'id', 'product_id');
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($product) {
+            $title = str_replace('?', '', $product->title);
+            $slug = preg_replace('/\s+/', '-', $title);
+            $product->slug = $slug;
+        });
+        static::updating(function ($product) {
+            $title = str_replace('?', '', $product->title);
+            $slug = preg_replace('/\s+/', '-', $title);
+            $product->slug = $slug;
+        });
+    }
 }
