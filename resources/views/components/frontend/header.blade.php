@@ -35,6 +35,12 @@
                   >Rewards</a
                 >
               </li>
+              <li class="mx-5 py-6 md:py-0">
+                <a href="{{ route('profile.show') }}" class="text-black font-bold {{\Route::current()->getName() == 'index' ? 'md:text-white' : ''}} hover:underline">
+                    Profile
+                </a>
+              </li>
+              
             </ul>
           </div>
           <div class="w-auto">
@@ -66,7 +72,7 @@
                 <a
                   id="header-cart"
                   class="flex items-center justify-center w-8 h-8 text-black {{\Route::current()->getName() == 'index' ? 'md:text-white' : ''}}"
-                  href="cart.html"
+                  href="{{route('cart')}}"
                 >
                   <svg
                     class="fill-current"

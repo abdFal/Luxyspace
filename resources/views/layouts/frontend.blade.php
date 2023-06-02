@@ -15,13 +15,12 @@
     <link rel="apple-touch-icon" href="{{ url('/frontend/images/content/favicon.png') }}" />
     <!-- Place favicon.ico in the root directory -->
 
-    <link rel="stylesheet" href="./css/main.css" />
     <link rel="icon" href="{{ url('/frontend/images/content/favicon.png') }}" />
 
     <meta name="theme-color" content="#000" />
-  <link rel="icon" href="favicon.ico"><link href="{{url('/frontend/css/app.minify.css')}}" rel="stylesheet"></head>
+    <link rel="icon" href="favicon.ico"><link href="{{url('/frontend/css/app.minify.css')}}" rel="stylesheet"></head>
 
-  <body>
+    <body>
     <!-- Add your site or application content here -->
 
     <!-- START: HEADER -->
@@ -42,6 +41,7 @@
     <!-- END: LOAD SVG  -->
 
     <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    @yield('script')
     <script>
       window.ga = function () {
         ga.q.push(arguments);
@@ -54,5 +54,7 @@
       ga("send", "pageview");
     </script>
     <script src="https://www.google-analytics.com/analytics.js" async></script>
-  <script src="{{url('/frontend/js/app.js')}}"></script></body>
+    <script src="{{url('/frontend/js/app.js')}}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
 </html>

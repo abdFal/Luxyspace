@@ -14,7 +14,7 @@ class Products extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'slug', 'price', 'description', 'Qty'
+        'title', 'slug', 'price', 'description', 'qty'
     ];
 
     // protected $guarded = []; for all data could be accessed
