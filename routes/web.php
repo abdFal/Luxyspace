@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleryController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [FrontendController::class, 'index'])
@@ -26,5 +27,6 @@ Route::middleware(['auth:sanctum', 'is_admin', config('jetstream.auth_session'),
         Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
             'index', 'create', 'store', 'destroy'
         ]);
+        Route::resource('transaction', TransactionController::class);
     });
 

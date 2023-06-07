@@ -32,43 +32,53 @@
         </h2>
     </x-slot>
 
-    <x-slot name="script">
-        <script>
-            var datatable = $('#crudTable').dataTable(
-                {
-                    ajax: {
-                        'url': '{!! url()->current() !!}'
-                    },
-                    columns: [
-                            {data: 'id', name: 'id', width: '5%'},
-                            {data: 'url_image', name: 'url_image'},
-                            {data: 'is_fetured', name: 'is_fetured'},
-                            {data: 'action', name: 'action', orderable: false, searchable: false, width: '25%'}
-                    ],
-                }
-            )
-        </script>
-    </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mb-5">
-                <a href="{{route('dashboard.product.gallery.create', $product->id)}}" class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded shadow-lg">+ Upload Photos...</a>
-            </div>
-            <div class="shadow overflow-hidden sm-rounded-md">
+            <div>
+                @if ($errors->any())
+                    <div class="md-5" role="alert">
+                        <div class="bg-red-600 text-white font-bold rounded-t px-4 py-2">
+                            There is something wrong
+                        </div>
+                        <div class="bg-red-200 text-red-800 px-4 py-3 rounded-b shadow-md mt-0">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+                <div class="shadow overflow-hidden sm-rounded-md">
+                    <h2 class="text-2xl px-4 py-2 text-gray-500 font-bold">Add Product Images</h2>
                 <div class="px-4 py-5 bg-white sm:p-6">
-                    <table id="crudTable" style="text-align: center">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Photo</th>
-                                <th>Is Featured</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                    </table>
+                <form action="{{route('dashboard.product.gallery.store', $product->id)}}" class ="w-full" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="flex flex-wrap -mx-3 mb-4">
+                        <div class="w-full px-3">
+                            <label for="url_image" class="block uppercase tracking-wide text-gray-300 text-xs font-bold mb-2">Image</label>
+                            <input type="file" multiple id="url_image" name="files[]" accept="image/*" class="block w-full bg-gray-200 text-gray-600 border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-light focus:bg-gray-100">
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap mb-4">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded shadow-lg"> + Add Images</button>
+                    </div>
+                </form>
+                </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#description' ) )
+            .then( editor => {
+                    console.log( editor );
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
+    </script>
 </x-app-layout>
