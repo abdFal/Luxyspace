@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -19,7 +20,7 @@ class UserController extends Controller
             ->addColumn('action', function($item){
                 return '
                 <a href="' . route('dashboard.user.edit', $item->id) . '" class="bg-blue-500 hover:bg-blue-700 text-white font-bold -my-3 py-2 px-4 rounded shadow-lg">Edit</a>
-                <form class="inline-block" method="post" action="'. route('dashboard.product.destroy', $item->id). '">
+                <form class="inline-block" method="post" action="'. route('dashboard.user.destroy', $item->id). '">
                 ' . method_field('delete') . csrf_field() . '
                 <button type="submit" class="h-10 px-4 text-sm text-red-100 transition-colors duration-150 bg-red-700 font-bold text-white rounded focus:shadow-outline hover:bg-red-800">Delete</button>
                 </form>';
@@ -58,24 +59,26 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('pages.dashboard.user.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->update($request->all());
+        return redirect()->route('dashboard.user.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('dashboard.user.index');
     }
 }

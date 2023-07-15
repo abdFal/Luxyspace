@@ -9,10 +9,10 @@
             <a href="index.html">Home</a>
           </li>
           <li>
-            <a href="#">Office Room</a>
+            <a href="#">Just Arrived</a>
           </li>
           <li>
-            <a href="#" aria-label="current-page">Details</a>
+            <a href="#" aria-label="current-page">{{$product->title}}</a>
           </li>
         </ul>
       </div>
@@ -23,77 +23,31 @@
     <section class="container mx-auto px-4">
       <div class="flex flex-wrap my-4 md:my-12">
         <div class="w-full md:hidden px-4">
-          <h2 class="text-5xl font-semibold">Chair Thatty</h2>
-          <span class="text-xl">IDR 12.000.000</span>
+          <h2 class="text-2xl font-semibold">{{$product->title}}</h2>
+          <span class="text-xl">RP. {{number_format($product->price)}}</span>
         </div>
         <div class="flex-1">
           <div class="slider">
             <div class="thumbnail">
-              <div class="px-2">
-                <div
-                  class="item selected"
-                  data-img="/frontend/images/content/showcase-1.front.jpg"
-                >
-                  <img
-                    src="/frontend/images/content/showcase-1.front.jpg"
-                    alt="front"
-                    class="object-cover w-full h-full rounded-lg"
-                  />
+              @foreach ($product->gallery as $item)
+                <div class="px-2">
+                  <div
+                    class="item {{$loop->first ? 'selected' : ''}}"
+                    data-img="{{Storage::url($item->url_image)}}"
+                  >
+                    <img
+                      src="{{Storage::url($item->url_image)}}"
+                      alt="front"
+                      class="object-cover w-full h-full rounded-lg"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div class="px-2">
-                <div
-                  class="item"
-                  data-img="/frontend/images/content/showcase-1.back.jpg"
-                >
-                  <img
-                    src="/frontend/images/content/showcase-1.back.jpg"
-                    alt="back"
-                    class="object-cover w-full h-full rounded-lg"
-                  />
-                </div>
-              </div>
-              <div class="px-2">
-                <div
-                  class="item"
-                  data-img="/frontend/images/content/showcase-1.rear.jpg"
-                >
-                  <img
-                    src="/frontend/images/content/showcase-1.rear.jpg"
-                    alt="rear"
-                    class="object-cover w-full h-full rounded-lg"
-                  />
-                </div>
-              </div>
-              <div class="px-2">
-                <div
-                  class="item"
-                  data-img="/frontend/images/content/showcase-1.side.jpg"
-                >
-                  <img
-                    src="/frontend/images/content/showcase-1.side.jpg"
-                    alt="side"
-                    class="object-cover w-full h-full rounded-lg"
-                  />
-                </div>
-              </div>
-              <div class="px-2">
-                <div
-                  class="item"
-                  data-img="/frontend/images/content/showcase-1.top.jpg"
-                >
-                  <img
-                    src="/frontend/images/content/showcase-1.top.jpg"
-                    alt="top"
-                    class="object-cover w-full h-full rounded-lg"
-                  />
-                </div>
-              </div>
+              @endforeach
             </div>
             <div class="preview">
               <div class="item rounded-lg h-full overflow-hidden">
                 <img
-                  src="/frontend/images/content/showcase-1.front.jpg"
+                  src="{{$product->gallery()->exists() ? Storage::url($product->gallery->first()->url_image) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='}}"
                   alt="front"
                   class="object-cover w-full h-full rounded-lg"
                 />
@@ -102,8 +56,8 @@
           </div>
         </div>
         <div class="flex-1 px-4 md:p-6">
-          <h2 class="text-5xl font-semibold">Chair Thatty</h2>
-          <p class="text-xl">IDR 12.000.000</p>
+          <h2 class="text-4xl font-semibold">{{$product->title}}</h2>
+          <p class="text-xl">RP. {{number_format($product->price)}}</p>
 
           <a
             href="cart.html"
@@ -134,16 +88,9 @@
           >
           <hr class="my-8" />
 
-          <h6 class="text-xl font-semibold mb-4">About the product</h6>
-          <p class="text-xl leading-7 mb-6">
-            Tailored to a level of perfection synonymous with that of a Savile
-            Row suit and with understated quality in the detail, Jetty has been
-            influenced by timeless 1950s style.
-          </p>
-          <p class="text-xl leading-7">
-            Providing a subtle nod to the past, Jetty also provides a perfect
-            solution for the way we work today. A comprehensive product family,
-            Jetty features a variety of elegant chairs and sofas.
+          <h6 class="text-xl font-semibold mb-4">About this product</h6>
+          <p class="text-xl leading-5 mb-6">
+            {!!$product->description!!}
           </p>
         </div>
       </div>
@@ -159,70 +106,24 @@
           </h3>
         </div>
         <div class="flex overflow-x-auto mb-4 -mx-3">
+          @foreach ($recommendations as $recommendation)
           <div class="px-3 flex-none" style="width: 320px">
             <div class="rounded-xl p-4 pb-8 relative bg-white">
               <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
                 <img
-                  src="/frontend/images/content/chair-1.png"
+                  src="{{$recommendation->gallery()->exists() ? Storage::url($recommendation->gallery->first()->url_image) : 'data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='}}"
                   alt=""
                   class="w-full h-full object-cover object-center"
                 />
               </div>
-              <h5 class="text-lg font-semibold mt-4">Cangkir Mauttie</h5>
-              <span class="">IDR 89.300.000</span>
-              <a href="details.html" class="stretched-link">
+              <h5 class="text-lg font-semibold mt-4">{{$recommendation->title}}</h5>
+              <span class="">RP. {{number_format($recommendation->price)}}</span>
+              <a href="{{route('details', $recommendation->slug)}}" class="stretched-link">
                 <!-- fake children -->
               </a>
             </div>
           </div>
-          <div class="px-3 flex-none" style="width: 320px">
-            <div class="rounded-xl p-4 pb-8 relative bg-white">
-              <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
-                <img
-                  src="/frontend/images/content/chair-2.png"
-                  alt=""
-                  class="w-full h-full object-cover object-center"
-                />
-              </div>
-              <h5 class="text-lg font-semibold mt-4">Saman Kakka</h5>
-              <span class="">IDR 14.500.399</span>
-              <a href="details.html" class="stretched-link">
-                <!-- fake children -->
-              </a>
-            </div>
-          </div>
-          <div class="px-3 flex-none" style="width: 320px">
-            <div class="rounded-xl p-4 pb-8 relative bg-white">
-              <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
-                <img
-                  src="/frontend/images/content/chair-3.png"
-                  alt=""
-                  class="w-full h-full object-cover object-center"
-                />
-              </div>
-              <h5 class="text-lg font-semibold mt-4">Lino Dino</h5>
-              <span class="">IDR 22.000.000</span>
-              <a href="details.html" class="stretched-link">
-                <!-- fake children -->
-              </a>
-            </div>
-          </div>
-          <div class="px-3 flex-none" style="width: 320px">
-            <div class="rounded-xl p-4 pb-8 relative bg-white">
-              <div class="rounded-xl overflow-hidden card-shadow w-full h-36">
-                <img
-                  src="/frontend/images/content/chair-1.png"
-                  alt=""
-                  class="w-full h-full object-cover object-center"
-                />
-              </div>
-              <h5 class="text-lg font-semibold mt-4">Syail Ammeno</h5>
-              <span class="">IDR 6.399.999</span>
-              <a href="details.html" class="stretched-link">
-                <!-- fake children -->
-              </a>
-            </div>
-          </div>
+          @endforeach
         </div>
       </div>
     </section>

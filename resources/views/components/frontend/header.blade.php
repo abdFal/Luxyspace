@@ -35,11 +35,21 @@
                   >Rewards</a
                 >
               </li>
-              <li class="mx-5 py-6 md:py-0">
-                <a href="{{ route('profile.show') }}" class="text-black font-bold {{\Route::current()->getName() == 'index' ? 'md:text-white' : ''}} hover:underline">
-                    Profile
-                </a>
-              </li>
+              @auth
+                <li class="mx-5 py-6 md:py-0">
+                    <a href="{{ route('profile.show') }}" class="text-black font-bold {{\Route::current()->getName() == 'index' ? 'md:text-white' : ''}} hover:underline">
+                        Profile
+                    </a>
+                </li>
+              @endauth
+              @guest
+                <li class="mx-5 py-6 md:py-0">
+                    <a href="{{ route('login') }}" class="text-white font-bold bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2{{\Route::current()->getName() == 'index' ? 'md:text-white' : ''}} hover:underline">
+                        Login
+                    </a>
+                </li>
+              @endguest
+              
               
             </ul>
           </div>
