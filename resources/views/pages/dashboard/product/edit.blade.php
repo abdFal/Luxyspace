@@ -81,7 +81,7 @@
                     </div>
                     
                     <div class="flex flex-wrap mb-4">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded shadow-lg"> + Edit Product</button>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded shadow-lg"> Save</button>
                     </div>
                 </form>
                 </div>

@@ -32,6 +32,11 @@
                             {{ __('User') }}
                         </x-nav-link>
                     </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link href="{{ route('dashboard.my-transaction.index') }}" :active="request()->routeIs('dashboard.my-transaction.index')">
+                            {{ __('My Transaction') }}
+                        </x-nav-link>
+                    </div>
                 @endif
             </div>
 

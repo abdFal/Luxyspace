@@ -16,10 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('email');
-            $table->integer('no_telp');
             $table->string('courrier')->nullable();
             $table->string('payment')->default('midtrans');
-            $table->string('payment_url');
+            $table->string('payment_url')->nullable();
             $table->integer('total');
             $table->string('status')->default("pending");
             $table->softDeletes();

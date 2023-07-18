@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug', 100)->unique();
             $table->integer('price');
             $table->longText('description')->nullable();
-            $table->integer('Qty')->nullable();
+            $table->integer('qty')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
